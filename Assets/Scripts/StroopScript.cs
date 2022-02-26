@@ -19,11 +19,12 @@ public class StroopScript : MonoBehaviour
 
     public int hits = 0;
     public int clicks = 0;
+    public float accuracy = 0.0f;
     public int round = 0;
     public float startTime = 0.0f;
     public float endTime = 0.0f;
     public float totalTime = 0.0f;
-    public float reactionAvg;
+    public float reactionAvg = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -137,5 +138,15 @@ public class StroopScript : MonoBehaviour
         chooseColor();
         setColorValues();
         setTargetColor();
+    }
+
+    public void continueButtonOnClick()
+    {
+        accuracy = hits / clicks;
+        Debug.Log(accuracy);
+        totalTime = endTime - startTime;
+        reactionAvg = totalTime / clicks;
+        PlayerPrefs.SetFloat("StroopScore", accuracy);
+        PlayerPrefs.SetFloat("StroopReaction", reactionAvg);
     }
 }

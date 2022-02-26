@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DigitSpanTest : MonoBehaviour
 {
@@ -24,19 +25,29 @@ public class DigitSpanTest : MonoBehaviour
     public float score = 0.0f;
 
     public int correctAnswer = 0;
-    public int totalAnswer = 0;
 
     string[] questions = new string[] {"x + (3x - 2) = 18",
                                  "2(4 - x) - 3(x + 3) = -11",
                                  "2(x + 5) - 7 = 3(x - 2)",
                                  "2x = (24 / 3)",
-                                 "x - 9 = -3"};
+                                 "x - 9 = -3",
+                                 "3x + 5 = 11",
+                                 "9 = 3 + x/4",
+                                 "17 - 5x = 2",
+                                 "9x + 3 = 21",
+                                 "(9x + 1) * 2 = 56"
+                                 };
 
     int[] answers = new int[] {5,
                             2,
                             9,
                             4,
-                            6
+                            6,
+                            2,
+                            24,
+                            3,
+                            2,
+                            3
                             };
 
     public string[] words = {"replace", "hay", "trail", "carry", "decrease", "calendar", "anniversary",
@@ -77,7 +88,7 @@ public class DigitSpanTest : MonoBehaviour
     public void submitButtonOnClick()
     {
         int answer = int.Parse(answerInput.text);
-        totalAnswer++;
+        answerInput.text = "";
         if (answer == remainingAnswers[answerIndex])
         {
             correctAnswer++;
@@ -90,12 +101,15 @@ public class DigitSpanTest : MonoBehaviour
                 Debug.Log("TestCompleted");
                 displayChosenWords();
                 submitWindow.SetActive(true);
+                return;
             }
         }
-        if (correctAnswer < 5)
+        else
         {
-            setProblem();
+            shuffleProblem();
+            return;
         }
+        setProblem();
     }
 
     public void submitWordOnClick()
@@ -107,7 +121,7 @@ public class DigitSpanTest : MonoBehaviour
             submitedWordsList.Add(wordInputs[i].text);
         }
 
-        for (i = 5; i >= 0; i--)
+        for (i = 4; i >= 0; i--)
         {
             if (submitedWordsList[i] == selectedWordsList[i])
             {
@@ -138,6 +152,15 @@ public class DigitSpanTest : MonoBehaviour
 
         problem.text = selectedProblem;
         word.text = selectedWord;
+        selectedWordsList.Add(selectedWord);
+    }
+
+    public void shuffleProblem()
+    {
+        answerIndex = Random.Range(0, remainingProblems.Count);
+        selectedProblem = remainingProblems[answerIndex];
+
+        problem.text = selectedProblem;
     }
 
     public void startTest()
@@ -168,5 +191,12 @@ public class DigitSpanTest : MonoBehaviour
         {
             Debug.Log(selectedWordsList[i]);
         }
+    }
+
+    public void continueButtonOnClick()
+    {
+        Debug.Log(score);
+        PlayerPrefs.SetFloat("DigitSpanScore", score);
+        SceneManager.LoadScene(3);
     }
 }

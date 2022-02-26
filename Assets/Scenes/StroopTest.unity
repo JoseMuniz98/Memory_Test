@@ -1919,6 +1919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 394857188}
   - component: {fileID: 394857189}
+  - component: {fileID: 394857190}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2015,11 +2016,26 @@ MonoBehaviour:
   endWindow: {fileID: 793881823}
   hits: 0
   clicks: 0
+  accuracy: 0
   round: 0
   startTime: 0
   endTime: 0
   totalTime: 0
   reactionAvg: 0
+--- !u!114 &394857190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394857187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a04a64ad8857b4a8af916e0256499d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  submitNameWindow: {fileID: 0}
+  nameInput: {fileID: 0}
 --- !u!1 &484304173
 GameObject:
   m_ObjectHideFlags: 0
@@ -6598,7 +6614,7 @@ GameObject:
   - component: {fileID: 2144874090}
   - component: {fileID: 2144874089}
   m_Layer: 5
-  m_Name: StartButton
+  m_Name: EndButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6667,8 +6683,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 394857189}
-        m_MethodName: startTest
+      - m_Target: {fileID: 394857190}
+        m_MethodName: sendPlayerData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

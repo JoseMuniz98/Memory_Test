@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 2ea7072ae11f39b4fabe2b9ea8a6205b
+  - enabled: 1
+    path: Assets/Scenes/NBackScene.unity
+    guid: 4dd3cdfdfb02405469f900eaa6104dc5
+  - enabled: 1
+    path: Assets/Scenes/DigitSpanTest.unity
+    guid: 22a2db9a477b48340be9e65b09fc03b6
+  - enabled: 1
+    path: Assets/Scenes/StroopTest.unity
+    guid: 48fabb00759a32c4ba0bd8c5a40763d0
   m_configObjects: {}

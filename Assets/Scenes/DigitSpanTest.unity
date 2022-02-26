@@ -1064,12 +1064,6 @@ MonoBehaviour:
   answerIndex: 0
   score: 0
   correctAnswer: 0
-  totalAnswer: 0
-  questions:
-  - x + (3x - 2) = 18
-  - 2(4 - x) - 3(x + 3) = -11
-  - 2(x + 5) - 7 = 3(x - 2)
-  answers: 050000000200000009000000
   words:
   - replace
   - hay
@@ -1083,6 +1077,7 @@ MonoBehaviour:
   - pressure
   remainingWords: []
   remainingProblems: []
+  remainingAnswers: 
 --- !u!4 &227924424
 Transform:
   m_ObjectHideFlags: 0
@@ -1848,7 +1843,7 @@ GameObject:
   - component: {fileID: 691627384}
   - component: {fileID: 691627383}
   m_Layer: 5
-  m_Name: StartButton
+  m_Name: ContinueButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1917,8 +1912,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: startTest
+      - m_Target: {fileID: 227924423}
+        m_MethodName: continueButtonOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
