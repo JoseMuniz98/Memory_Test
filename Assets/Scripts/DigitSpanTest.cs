@@ -149,6 +149,7 @@ public class DigitSpanTest : MonoBehaviour
         answerIndex = Random.Range(0, remainingProblems.Count);
         selectedProblem = remainingProblems[answerIndex];
         selectedWord = remainingWords[Random.Range(0, remainingWords.Count)];
+        Debug.Log(remainingAnswers[answerIndex]);
 
         problem.text = selectedProblem;
         word.text = selectedWord;
@@ -159,6 +160,7 @@ public class DigitSpanTest : MonoBehaviour
     {
         answerIndex = Random.Range(0, remainingProblems.Count);
         selectedProblem = remainingProblems[answerIndex];
+        Debug.Log(remainingAnswers[answerIndex]);
 
         problem.text = selectedProblem;
     }
@@ -173,6 +175,7 @@ public class DigitSpanTest : MonoBehaviour
         word.text = selectedWord;
         selectedWordsList.Add(selectedWord);
         startWindow.SetActive(false);
+        Debug.Log(remainingAnswers[answerIndex]);
     }
 
     void displayRemainingProblems()
