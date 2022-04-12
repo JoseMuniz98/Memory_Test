@@ -5,6 +5,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public struct Problem
+{
+    string question;
+    int answer;
+
+    public Problem(string question, int answer)
+    {
+        this.question = question;
+        this.answer = answer;
+    }
+
+    public string getQuestion()
+    {
+        return this.question;
+    }
+
+    public int getAnswer()
+    {
+        return this.answer;
+    }
+}
+
 public class DigitSpanTest : MonoBehaviour
 {
     public Text word;
@@ -19,7 +41,6 @@ public class DigitSpanTest : MonoBehaviour
     [SerializeField] private Button startButton;
     public List<string> selectedWordsList = new List<string>();
     public List<string> submitedWordsList = new List<string>();
-    public string selectedProblem;
     public string selectedWord;
     public int answerIndex = 0;
     public float score = 0.0f;
@@ -54,21 +75,20 @@ public class DigitSpanTest : MonoBehaviour
                              "bicycle", "stool", "pressure"};
 
     public List<string> remainingWords = new List<string>();
-    public List<string> remainingProblems = new List<string>();
-    public List<int> remainingAnswers = new List<int>();
+    public List<Problem> problems = new List<Problem>();
 
     void Awake()
     {
         int i = 0;
+        for (i = 0; i < questions.Length; i++)
+        {
+            var problem = new Problem(questions[i], answers[i]);
+            problems.Add(problem);
+        }
+
         for (i = 0; i < words.Length; i++)
         {
             remainingWords.Add(words[i]);
-        }
-
-        for (i = 0; i < questions.Length; i++)
-        {
-            remainingProblems.Add(questions[i]);
-            remainingAnswers.Add(answers[i]);
         }
     }
 
@@ -89,12 +109,11 @@ public class DigitSpanTest : MonoBehaviour
     {
         int answer = int.Parse(answerInput.text);
         answerInput.text = "";
-        if (answer == remainingAnswers[answerIndex])
+        if (answer == problems[answerIndex].getAnswer())
         {
             correctAnswer++;
             Debug.Log(correctAnswer);
-            remainingProblems.Remove(selectedProblem);
-            remainingAnswers.Remove(remainingAnswers[answerIndex]);
+            problems.RemoveAt(answerIndex);
             remainingWords.Remove(selectedWord);
             if (correctAnswer == 5)
             {
@@ -146,45 +165,30 @@ public class DigitSpanTest : MonoBehaviour
 
     public void setProblem()
     {
-        answerIndex = Random.Range(0, remainingProblems.Count);
-        selectedProblem = remainingProblems[answerIndex];
+        answerIndex = Random.Range(0, problems.Count);
         selectedWord = remainingWords[Random.Range(0, remainingWords.Count)];
-        Debug.Log(remainingAnswers[answerIndex]);
 
-        problem.text = selectedProblem;
+        problem.text = problems[answerIndex].getQuestion();
         word.text = selectedWord;
         selectedWordsList.Add(selectedWord);
     }
 
     public void shuffleProblem()
     {
-        answerIndex = Random.Range(0, remainingProblems.Count);
-        selectedProblem = remainingProblems[answerIndex];
-        Debug.Log(remainingAnswers[answerIndex]);
+        answerIndex = Random.Range(0, problems.Count);
 
-        problem.text = selectedProblem;
+        problem.text = problems[answerIndex].getQuestion();
     }
 
     public void startTest()
     {
-        answerIndex = Random.Range(0, remainingProblems.Count);
-        selectedProblem = remainingProblems[answerIndex];
+        answerIndex = Random.Range(0, problems.Count);
         selectedWord = remainingWords[Random.Range(0, remainingWords.Count)];
 
-        problem.text = selectedProblem;
+        problem.text = problems[answerIndex].getQuestion();
         word.text = selectedWord;
         selectedWordsList.Add(selectedWord);
         startWindow.SetActive(false);
-        Debug.Log(remainingAnswers[answerIndex]);
-    }
-
-    void displayRemainingProblems()
-    {
-        int i = 0;
-        for(i = 0; i < remainingProblems.Count; i++)
-        {
-            Debug.Log(remainingProblems[i]);
-        }
     }
 
     void displayChosenWords()
